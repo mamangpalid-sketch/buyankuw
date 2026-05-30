@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>for bulan 💗</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ffb6c1,#ffc0cb,#ffe4e1);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.page { display: none; padding: 40px; }
+.active { display: block; }
+
+.card {
+    background: rgba(255,255,255,0.2);
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    display: inline-block;
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 16px;
+}
+
+/* NEXT BUTTON */
+.next {
+    margin-top: 30px;
+    display: inline-block;
+    background: white;
+    color: #ff69b4;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* BUTTON YES NO */
+.yes {
+    background: #ff69b4;
+    color: white;
+}
+
+.no {
+    background: #ff4d6d;
+    color: white;
+    position: relative;
+}
+
+.heart {
+    font-size: 35px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+    <source src="ssstik.io_1780138380446.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PIN PAGE -->
+<div id="pinPage" class="page active">
+    <h2>masukin pin dulu 💗</h2>
+    <div class="card">
+        <input id="pin" type="password" placeholder="****">
+        <br>
+        <button onclick="checkPin()">buka</button>
+    </div>
+</div>
+
+<!-- MESSAGE -->
+<div id="msg" class="page">
+    <h2>hai bulan...</h2>
+    <div class="card">
+        aku minta maaf ya kalau aku pernah bikin kamu kecewa, capek, atau sakit hati 💗<br>
+        aku lagi belajar jadi lebih baik buat kamu...
+    </div>
+    <div class="next" onclick="go(1)">next</div>
+</div>
+
+<!-- QUEST 1 -->
+<div id="q1" class="page">
+    <h2>kamu mau maafin aku ga? 🥺</h2>
+    <div class="card">
+        <button class="yes" onclick="go(2)">iya</button>
+        <button class="no" id="noBtn">tidak</button>
+    </div>
+    <div class="next" onclick="go(2)">next</div>
+</div>
+
+<!-- QUEST 2 -->
+<div id="q2" class="page">
+    <h2>tingkat kekesalan kamu 💔</h2>
+    <div class="card">
+        <p id="anger">0 / 10</p>
+        <button onclick="addAnger()">klik</button>
+    </div>
+    <div class="next" onclick="go(3)">next</div>
+</div>
+
+<!-- FINAL -->
+<div id="q3" class="page">
+    <h2>cium sayang 💋</h2>
+    <div class="card">
+        <p id="kiss">0 / 10</p>
+        <div class="heart" onclick="addKiss()">💗 klik aku</div>
+    </div>
+    <div class="next" onclick="alert('makasih ya bulan 💗')">finish</div>
+</div>
+
+<script>
+let anger = 0;
+let kiss = 0;
+
+/* PIN CHECK */
+function checkPin() {
+    let pin = document.getElementById("pin").value;
+
+    if(pin === "2010") {
+        document.getElementById("pinPage").classList.remove("active");
+        document.getElementById("msg").classList.add("active");
+
+        let music = document.getElementById("music");
+        music.play(); // autoplay setelah PIN benar
+    } else {
+        alert("pin salah 😝");
+    }
+}
+
+/* NAV */
+function go(n){
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+
+    if(n === 1) document.getElementById("q1").classList.add("active");
+    if(n === 2) document.getElementById("q2").classList.add("active");
+    if(n === 3) document.getElementById("q3").classList.add("active");
+}
+
+/* ANGER CLICK */
+function addAnger(){
+    if(anger < 10) anger++;
+    document.getElementById("anger").innerText = anger + " / 10";
+}
+
+/* KISS CLICK */
+function addKiss(){
+    if(kiss < 10) kiss++;
+    document.getElementById("kiss").innerText = kiss + " / 10";
+}
+
+/* NO BUTTON KABUR 😭 */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", kabur);
+noBtn.addEventListener("click", kabur);
+
+function kabur(){
+    let x = Math.random() * 200 - 100;
+    let y = Math.random() * 200 - 100;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+</script>
+
+</body>
+</html>
